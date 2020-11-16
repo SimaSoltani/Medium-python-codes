@@ -35,3 +35,24 @@ link.click()
 #Wait for 15 seconds to allow chrome to download file 
 time.sleep(15) 
 
+# locating most recent *.xlsx download file
+list_of_files = glob.glob('C:/Users/Sima/Downloads/*.csv')
+latest_file = max(list_of_files,key = os.path.getmtime)
+
+
+# replace the "\" with "/" so file path can be located by python
+latest_file = latest_file.replace("\\",'/')
+
+# we need to locate the old .csv file(s) in the dir we want to store the new csv file in
+list_of_files = glob.glob('C:/Users/Sima/OneDrive - The University of Western Ontario/Personal/Medium/Medium-python-codes/data/interactive dash/*.csv')
+
+# need to delete old csv file(s) so if we download new csv file with the same name we do not get an error while moving it
+for file in list_of_files:
+    os.remove(file)
+    
+# Move the new file from the download directory to the Medium dir
+shutil.move(latest_file,'C:/Users/Sima/OneDrive - The University of Western Ontario/Personal/Medium/Medium-python-codes/data/interactive dash/')
+
+import pandas as pd
+import re
+
