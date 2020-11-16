@@ -65,4 +65,28 @@ latest_file = max(list_of_files,key = os.path.getctime)
 
 df = pd.read_csv('{}'.format(latest_file),header=0)        
 
-# Do some cleaning                  
+# Do some cleaning  
+
+#Formatting time series dataframes to be input into plotly garph
+import plotly.express as px
+from plotly.offline import plot
+list_of_files = glob.glob('C:/Users/Sima/OneDrive - The University of Western Ontario/Personal/Medium/Medium-python-codes/data/interactive dash/*.csv')
+latest_file = max(list_of_files, key = os.path.getmtime)
+
+df = pd.read_csv(latest_file, header = 0)
+
+df_grouped = df.groupby(['Accurate_Episode_Date','Reporting_PHU_City']).size().to_frame(name = 'Confirmed_cases').reset_index()
+
+fig = px.scatter(df_grouped,x='Accurate_Episode_Date',y = 'Confirmed_cases', color = 'Reporting_PHU_City')
+fig.update_traces(mode = 'markers+lines')
+# fig .update_traces(mode ='lines)
+plot(fig)
+
+df_grouped = df.groupby(['Case_Reported_Date','Reporting_PHU_City']).size().to_frame(name = 'Confirmed_cases').reset_index()
+
+fig = px.scatter(df_grouped,x='Case_Reported_Date',y = 'Confirmed_cases', color = 'Reporting_PHU_City')
+fig.update_traces(mode = 'markers+lines')
+# fig .update_traces(mode ='lines)
+plot(fig)
+
+
