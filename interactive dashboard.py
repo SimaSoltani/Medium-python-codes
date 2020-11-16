@@ -56,3 +56,13 @@ shutil.move(latest_file,'C:/Users/Sima/OneDrive - The University of Western Onta
 import pandas as pd
 import re
 
+pd.set_option('display.max_rows',500)
+pd.options.display.max_colwidth = 150
+
+# again we need to locate the csv file
+list_of_files = glob.glob('C:/Users/Sima/OneDrive - The University of Western Ontario/Personal/Medium/Medium-python-codes/data/interactive dash/*.csv')
+latest_file = max(list_of_files,key = os.path.getctime)
+
+df = pd.read_csv('{}'.format(latest_file),header=0)        
+
+# Do some cleaning                  
