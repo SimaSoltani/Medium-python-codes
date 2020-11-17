@@ -83,10 +83,16 @@ fig.update_traces(mode = 'markers+lines')
 plot(fig)
 
 df_grouped = df.groupby(['Case_Reported_Date','Reporting_PHU_City']).size().to_frame(name = 'Confirmed_cases').reset_index()
+df_grouped.to_csv('time_series_plotly.csv', index = False)
 
 fig = px.scatter(df_grouped,x='Case_Reported_Date',y = 'Confirmed_cases', color = 'Reporting_PHU_City')
 fig.update_traces(mode = 'markers+lines')
 # fig .update_traces(mode ='lines)
 plot(fig)
 
+# Creating a local webpage for your dashboard using Dash
 
+# Step1 : Create a virtual environment
+# go to the location and create a create: python3 -m venv venv
+# activate the environment: venv\scripts\activate
+ 
